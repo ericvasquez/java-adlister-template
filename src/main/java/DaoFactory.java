@@ -1,5 +1,6 @@
 public class DaoFactory {
     private static Ads adsDao;
+    private static Students studentsDao;
 
     public static Ads getAdsDao() {
         if (adsDao == null) {
@@ -7,4 +8,12 @@ public class DaoFactory {
         }
         return adsDao;
     }
+
+    public static Students getStudentsDao(){
+        if(studentsDao == null){
+            studentsDao = new ListStudentsDao();
+        }
+        return studentsDao;
+    }
+
 }
