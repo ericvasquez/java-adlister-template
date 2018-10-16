@@ -1,4 +1,5 @@
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 import com.mysql.cj.jdbc.Driver;
 
@@ -24,22 +25,20 @@ public class AuthorMySQLDao implements Authors {
     @Override
     public List<Author> all() {
         String query = "SELECT * FROM authors";
+        List<Author> authors = new ArrayList<>();
 
         try {
             Statement stmt = connection.createStatement();
             ResultSet rs = stmt.executeQuery(query);
             while(rs.next()){
-
-                System.out.println("rs = " + rs.getLong("id"));
-                System.out.println("rs = " + rs.getString("first_name"));
-                System.out.println("rs = " + rs.getString("last_name"));
+               authors.add(new Author(rs.getLong("id"), rs.getString("first_name"), rs.getString("last_name")));
 
             }
         }catch (SQLException e){
-
+            e.printStackTrace();
         }
 
-        return null;
+        return authors;
     }
 
     @Override

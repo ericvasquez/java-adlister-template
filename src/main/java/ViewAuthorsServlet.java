@@ -11,8 +11,8 @@ public class ViewAuthorsServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-            DaoFactory.getAuthorsDao().all();
-//        request.setAttribute("ads", DaoFactory.getAdsDao().all());
-//        request.getRequestDispatcher("/WEB-INF/ads/index.jsp").forward(request, response);
+            List<Author> authors = DaoFactory.getAuthorsDao().all();
+            request.setAttribute("authors", authors);
+            request.getRequestDispatcher("WEB-INF/authors/index.jsp").forward(request, response);
     }
 }
