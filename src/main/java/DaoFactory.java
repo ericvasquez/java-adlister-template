@@ -1,5 +1,8 @@
+
 public class DaoFactory {
+
     private static Ads adsDao;
+    private static Authors authorsDao;
 
     public static Ads getAdsDao() {
         if (adsDao == null) {
@@ -7,4 +10,13 @@ public class DaoFactory {
         }
         return adsDao;
     }
+
+    public static Authors getAuthorsDao() {
+        if (authorsDao == null) {
+            authorsDao = new AuthorMySQLDao();
+        }
+        return authorsDao;
+    }
+
+
 }
