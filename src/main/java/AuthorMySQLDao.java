@@ -54,6 +54,21 @@ public class AuthorMySQLDao implements Authors {
 
     @Override
     public Long insert(Author author) {
+        String query = String.format("insert into authors(first_name, last_name) values('%s','%s')", author.getFirst_name(), author.getLast_name());
+        try {
+            Statement stmt = connection.createStatement();
+            stmt.executeUpdate( query, Statement.RETURN_GENERATED_KEYS);
+            ResultSet rs = stmt.getGeneratedKeys();
+            if (rs.next()) {
+                System.out.println("Inserted a new record! New id: " + rs.getLong(1));
+                return rs.getLong(1);
+            }
+
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+
+
         return null;
     }
 
