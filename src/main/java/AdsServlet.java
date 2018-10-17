@@ -1,8 +1,6 @@
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.*;
 import java.io.IOException;
 import java.util.List;
 
@@ -13,6 +11,9 @@ public class AdsServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 
         List<Ad> adsList = DaoFactory.getAdsDao().all();
+        HttpSession session = request.getSession();
+
+        session.setAttribute("firstAdSeen", adsList.get(0));
         request.setAttribute("adsList", adsList);
         request.getRequestDispatcher("/ads/index.jsp").forward(request,response);
     }
